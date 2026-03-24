@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Finance Tracker</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="layout">
+
+    <aside class="sidebar">
+      <div class="sidebar-title">Finance Tracker</div>
+      <nav>
+        <div class="nav-item active" onclick="showPage('dashboard')">Dashboard</div>
+        <div class="nav-item" onclick="showPage('tax')">Tax Calculator</div>
+      </nav>
+    </aside>
+
+    <main class="main">
+
+      <!-- DASHBOARD PAGE -->
+      <div id="page-dashboard">
+        <div class="page-title">Dashboard</div>
+
+        <div class="cards">
+          <div class="metric">
+            <div class="metric-label">Current balance</div>
+            <div class="metric-value" id="balance">$0.00</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Total income</div>
+            <div class="metric-value green" id="income">$0.00</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Total expenses</div>
+            <div class="metric-value red" id="expenses">$0.00</div>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <div class="card-title">Add transaction</div>
+            <div class="form-row">
+              <label class="form-label">Type</label>
+              <select id="type">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label class="form-label">Amount ($)</label>
+              <input type="number" id="amount" placeholder="0.00" />
+            </div>
+            <div class="form-row">
+              <label class="form-label">Category</label>
+              <input type="text" id="category" placeholder="e.g. Salary, Food..." />
+            </div>
+            <div class="form-row">
+              <label class="form-label">Description (optional)</label>
+              <input type="text" id="description" placeholder="Add a note..." />
+            </div>
+            <button class="btn" onclick="addTransaction()">Add transaction</button>
+            <div id="add-msg" style="font-size:13px; margin-top:8px; color:#0F6E56;"></div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="card">
+              <div class="card-title">Spending by category</div>
+              <div id="category-bars"></div>
+            </div>
+            <div class="card">
+              <div class="card-title">Recent transactions</div>
+              <div id="recent-transactions"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAX PAGE -->
+      <div id="page-tax" style="display:none;">
+        <div class="page-title">Tax Calculator</div>
+        <div class="grid2">
+          <div class="card">
+            <div class="card-title">Ontario income tax</div>
+            <div class="form-row">
+              <label class="form-label">Annual gross income ($)</label>
+              <input type="number" id="tax-income" placeholder="e.g. 60000" />
+            </div>
+            <button class="btn" onclick="calcTax()">Calculate tax</button>
+            <div id="tax-result"></div>
+          </div>
+          <div class="card">
+            <div class="card-title">HST calculator</div>
+            <div class="form-row">
+              <label class="form-label">Pre-tax amount ($)</label>
+              <input type="number" id="hst-amount" placeholder="e.g. 100" />
+            </div>
+            <button class="btn" onclick="calcHst()">Calculate HST</button>
+            <div id="hst-result"></div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+  <script src="/static/script.js"></script>
+</body>
